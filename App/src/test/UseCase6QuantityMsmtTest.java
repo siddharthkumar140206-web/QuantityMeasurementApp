@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
- class UseCase6QuantityMsmtTest {
+class UseCase6QuantityMsmtTest {
 
     // 1️⃣ Feet + Inches
     @Test
