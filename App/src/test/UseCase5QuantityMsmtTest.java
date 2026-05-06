@@ -1,191 +1,189 @@
-package test;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+ class UseCase6QuantityMsmtTest {
 
-public class UseCase5QuantityMsmtTest {
-
-    // -------- FEET TO INCHES --------
-
+    // 1️⃣ Feet + Inches
     @Test
-    void testConversion_FeetToInches() {
+    void testAddition_FeetAndInches() {
 
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
                         1.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
 
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
                         12.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        assertTrue(result.equals(expected));
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
+                        2.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertTrue(l1.add(l2).equals(expected));
     }
 
-    // -------- INCHES TO FEET --------
-
+    // 2️⃣ Inches + Inches
     @Test
-    void testConversion_InchesToFeet() {
+    void testAddition_InchesAndInches() {
 
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
                         24.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES,
-                        UseCase5QuantityMsmt.LengthUnit.FEET
-                );
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
-                        2.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET
-                );
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
+                        12.0,
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        assertTrue(result.equals(expected));
-    }
-
-    // -------- YARDS TO INCHES --------
-
-    @Test
-    void testConversion_YardsToInches() {
-
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        1.0,
-                        UseCase5QuantityMsmt.LengthUnit.YARDS,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
-
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
                         36.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        assertTrue(result.equals(expected));
+        assertTrue(l1.add(l2).equals(expected));
     }
 
-    // -------- INCHES TO YARDS --------
-
+    // 3️⃣ Yard + Feet
     @Test
-    void testConversion_InchesToYards() {
+    void testAddition_YardAndFeet() {
 
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        72.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES,
-                        UseCase5QuantityMsmt.LengthUnit.YARDS
-                );
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        1.0,
+                        UseCase6QuantityMsmt.LengthUnit.YARDS);
 
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
+                        3.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
                         2.0,
-                        UseCase5QuantityMsmt.LengthUnit.YARDS
-                );
+                        UseCase6QuantityMsmt.LengthUnit.YARDS);
 
-        assertTrue(result.equals(expected));
+        assertTrue(l1.add(l2).equals(expected));
     }
 
-    // -------- CM TO INCHES --------
-
+    // 4️⃣ Centimeter + Inches
     @Test
-    void testConversion_CentimetersToInches() {
+    void testAddition_CentimeterAndInches() {
 
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
                         2.54,
-                        UseCase5QuantityMsmt.LengthUnit.CENTIMETERS,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
+                        UseCase6QuantityMsmt.LengthUnit.CENTIMETERS);
 
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
                         1.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        assertTrue(result.equals(expected));
-    }
-
-    // -------- FEET TO YARDS --------
-
-    @Test
-    void testConversion_FeetToYards() {
-
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        6.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET,
-                        UseCase5QuantityMsmt.LengthUnit.YARDS
-                );
-
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
                         2.0,
-                        UseCase5QuantityMsmt.LengthUnit.YARDS
-                );
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
 
-        assertTrue(result.equals(expected));
-    }
-
-    // -------- ZERO VALUE --------
-
-    @Test
-    void testConversion_ZeroValue() {
-
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        0.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
-
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
-                        0.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
-
-        assertTrue(result.equals(expected));
-    }
-
-    // -------- NEGATIVE VALUE --------
-
-    @Test
-    void testConversion_NegativeValue() {
-
-        UseCase5QuantityMsmt.Length result =
-                UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        -1.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
-
-        UseCase5QuantityMsmt.Length expected =
-                new UseCase5QuantityMsmt.Length(
-                        -12.0,
-                        UseCase5QuantityMsmt.LengthUnit.INCHES
-                );
-
-        assertTrue(result.equals(expected));
-    }
-
-    // -------- NULL UNIT --------
-
-    @Test
-    void testConversion_InvalidUnit_Throws() {
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> UseCase5QuantityMsmt.demonstrateLengthConversion(
-                        1.0,
-                        UseCase5QuantityMsmt.LengthUnit.FEET,
-                        null
+        assertTrue(
+                l1.add(
+                        l2.convertTo(
+                                UseCase6QuantityMsmt.LengthUnit.CENTIMETERS
+                        )
+                ).equals(
+                        expected.convertTo(
+                                UseCase6QuantityMsmt.LengthUnit.CENTIMETERS
+                        )
                 )
         );
     }
+
+    // 5️⃣ Same Reference
+    @Test
+    void testEquality_SameReference() {
+
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        1.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertTrue(l1.equals(l1));
+    }
+
+    // 6️⃣ Null Comparison
+    @Test
+    void testEquality_NullComparison() {
+
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        1.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertFalse(l1.equals(null));
+    }
+
+    // 7️⃣ Different Value
+    @Test
+    void testEquality_DifferentValue() {
+
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        1.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
+                        2.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertFalse(l1.equals(l2));
+    }
+
+    // 8️⃣ Zero Value Addition
+    @Test
+    void testAddition_ZeroValue() {
+
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        0.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
+                        0.0,
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
+
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
+                        0.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertTrue(l1.add(l2).equals(expected));
+    }
+
+    // 9️⃣ Negative Value Addition
+    @Test
+    void testAddition_NegativeValue() {
+
+        UseCase6QuantityMsmt.Length l1 =
+                new UseCase6QuantityMsmt.Length(
+                        -1.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        UseCase6QuantityMsmt.Length l2 =
+                new UseCase6QuantityMsmt.Length(
+                        12.0,
+                        UseCase6QuantityMsmt.LengthUnit.INCHES);
+
+        UseCase6QuantityMsmt.Length expected =
+                new UseCase6QuantityMsmt.Length(
+                        0.0,
+                        UseCase6QuantityMsmt.LengthUnit.FEET);
+
+        assertTrue(l1.add(l2).equals(expected));
+    }
 }
+
