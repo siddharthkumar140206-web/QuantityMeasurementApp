@@ -1,6 +1,6 @@
-public class UseCase7QuantityMsmt {
+public class UseCase8QuantityMsmt {
 
-    // ENUM FOR UNITS
+    // STANDALONE ENUM
     enum LengthUnit {
 
         FEET(12.0),
@@ -17,6 +17,17 @@ public class UseCase7QuantityMsmt {
         public double getConversionFactor() {
             return conversionFactor;
         }
+
+        // CONVERSION METHOD INSIDE ENUM
+        public double convert(double value,
+                              LengthUnit targetUnit) {
+
+            double inches =
+                    value * this.conversionFactor;
+
+            return inches /
+                    targetUnit.conversionFactor;
+        }
     }
 
     // LENGTH CLASS
@@ -25,39 +36,51 @@ public class UseCase7QuantityMsmt {
         private final double value;
         private final LengthUnit unit;
 
-        public Length(double value, LengthUnit unit) {
+        public Length(double value,
+                      LengthUnit unit) {
+
             this.value = value;
             this.unit = unit;
         }
 
-        // Convert to inches
-        private double convertToBaseUnit() {
-            return value * unit.getConversionFactor();
-        }
-
-        // Convert to target unit
+        // CONVERT METHOD
         public Length convertTo(LengthUnit targetUnit) {
 
-            double inches = convertToBaseUnit();
-
             double convertedValue =
-                    inches / targetUnit.getConversionFactor();
+                    unit.convert(value, targetUnit);
 
-            return new Length(convertedValue, targetUnit);
+            return new Length(
+                    convertedValue,
+                    targetUnit
+            );
         }
 
-        // ADDITION WITH TARGET UNIT
+        // ADD METHOD
         public Length add(Length other,
                           LengthUnit targetUnit) {
 
-            double totalInches =
-                    this.convertToBaseUnit()
-                            + other.convertToBaseUnit();
+            double value1 =
+                    unit.convert(value,
+                            targetUnit);
 
-            double result =
-                    totalInches / targetUnit.getConversionFactor();
+            double value2 =
+                    other.unit.convert(
+                            other.value,
+                            targetUnit);
 
-            return new Length(result, targetUnit);
+            return new Length(
+                    value1 + value2,
+                    targetUnit
+            );
+        }
+
+        // BASE UNIT
+        private double convertToBaseUnit() {
+
+            return unit.convert(
+                    value,
+                    LengthUnit.INCHES
+            );
         }
 
         @Override
@@ -66,7 +89,8 @@ public class UseCase7QuantityMsmt {
             if (this == obj)
                 return true;
 
-            if (obj == null || getClass() != obj.getClass())
+            if (obj == null ||
+                    getClass() != obj.getClass())
                 return false;
 
             Length other = (Length) obj;
@@ -79,11 +103,12 @@ public class UseCase7QuantityMsmt {
 
         @Override
         public String toString() {
+
             return value + " " + unit;
         }
     }
 
-    // DEMONSTRATION METHOD
+    // DEMO METHOD
     public static void demonstrateAddition(
             double value1,
             LengthUnit unit1,
@@ -91,22 +116,21 @@ public class UseCase7QuantityMsmt {
             LengthUnit unit2,
             LengthUnit targetUnit) {
 
-        Length length1 =
+        Length l1 =
                 new Length(value1, unit1);
 
-        Length length2 =
+        Length l2 =
                 new Length(value2, unit2);
 
         Length result =
-                length1.add(length2, targetUnit);
+                l1.add(l2, targetUnit);
 
-        System.out.println("====================================");
-        System.out.println("UC7 - Addition With Target Unit");
-        System.out.println("====================================");
+        System.out.println("================================");
+        System.out.println("UC8 - Standalone Enum Conversion");
+        System.out.println("================================");
 
-        System.out.println("First Length : " + length1);
-        System.out.println("Second Length : " + length2);
-        System.out.println("Target Unit : " + targetUnit);
+        System.out.println("First Length : " + l1);
+        System.out.println("Second Length : " + l2);
         System.out.println("Result : " + result);
     }
 
@@ -122,4 +146,3 @@ public class UseCase7QuantityMsmt {
         );
     }
 }
-
