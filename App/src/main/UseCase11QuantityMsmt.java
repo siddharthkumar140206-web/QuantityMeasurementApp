@@ -1,24 +1,23 @@
-
-public class UseCase10QuantityMsmt {
+public class UseCase11QuantityMsmt {
 
     // UNIT INTERFACE
     interface Unit {
 
-        double convert(double value, Unit targetUnit);
+        double convert(double value,
+                       Unit targetUnit);
     }
 
     // LENGTH UNIT ENUM
     enum LengthUnit implements Unit {
 
         FEET(12.0),
-        INCHES(1.0),
-        YARDS(36.0),
-        CENTIMETERS(0.393701);
+        INCHES(1.0);
 
         private final double conversionFactor;
 
         LengthUnit(double conversionFactor) {
-            this.conversionFactor = conversionFactor;
+            this.conversionFactor =
+                    conversionFactor;
         }
 
         @Override
@@ -40,13 +39,13 @@ public class UseCase10QuantityMsmt {
     enum WeightUnit implements Unit {
 
         KILOGRAM(1000.0),
-        GRAM(1.0),
-        POUND(453.592);
+        GRAM(1.0);
 
         private final double conversionFactor;
 
         WeightUnit(double conversionFactor) {
-            this.conversionFactor = conversionFactor;
+            this.conversionFactor =
+                    conversionFactor;
         }
 
         @Override
@@ -60,6 +59,35 @@ public class UseCase10QuantityMsmt {
                     value * this.conversionFactor;
 
             return grams /
+                    target.conversionFactor;
+        }
+    }
+
+    // VOLUME UNIT ENUM
+    enum VolumeUnit implements Unit {
+
+        LITRE(1000.0),
+        MILLILITRE(1.0),
+        GALLON(3785.41);
+
+        private final double conversionFactor;
+
+        VolumeUnit(double conversionFactor) {
+            this.conversionFactor =
+                    conversionFactor;
+        }
+
+        @Override
+        public double convert(double value,
+                              Unit targetUnit) {
+
+            VolumeUnit target =
+                    (VolumeUnit) targetUnit;
+
+            double millilitres =
+                    value * this.conversionFactor;
+
+            return millilitres /
                     target.conversionFactor;
         }
     }
@@ -78,11 +106,14 @@ public class UseCase10QuantityMsmt {
         }
 
         // CONVERT METHOD
-        public Quantity convertTo(Unit targetUnit) {
+        public Quantity convertTo(
+                Unit targetUnit) {
 
             double convertedValue =
-                    unit.convert(value,
-                            targetUnit);
+                    unit.convert(
+                            value,
+                            targetUnit
+                    );
 
             return new Quantity(
                     convertedValue,
@@ -113,7 +144,7 @@ public class UseCase10QuantityMsmt {
             );
         }
 
-        // BASE VALUE
+        // BASE UNIT
         private double convertToBaseUnit() {
 
             if (unit instanceof LengthUnit) {
@@ -124,9 +155,17 @@ public class UseCase10QuantityMsmt {
                 );
             }
 
+            if (unit instanceof WeightUnit) {
+
+                return unit.convert(
+                        value,
+                        WeightUnit.GRAM
+                );
+            }
+
             return unit.convert(
                     value,
-                    WeightUnit.GRAM
+                    VolumeUnit.MILLILITRE
             );
         }
 
@@ -157,58 +196,38 @@ public class UseCase10QuantityMsmt {
     }
 
     // DEMONSTRATION METHOD
-    public static void demonstrateQuantityAddition() {
+    public static void demonstrateVolumeAddition() {
 
-        Quantity length1 =
+        Quantity q1 =
                 new Quantity(
                         1.0,
-                        LengthUnit.FEET
+                        VolumeUnit.LITRE
                 );
 
-        Quantity length2 =
-                new Quantity(
-                        12.0,
-                        LengthUnit.INCHES
-                );
-
-        Quantity lengthResult =
-                length1.add(
-                        length2,
-                        LengthUnit.FEET
-                );
-
-        System.out.println("Length Result : "
-                + lengthResult);
-
-        Quantity weight1 =
-                new Quantity(
-                        1.0,
-                        WeightUnit.KILOGRAM
-                );
-
-        Quantity weight2 =
+        Quantity q2 =
                 new Quantity(
                         1000.0,
-                        WeightUnit.GRAM
+                        VolumeUnit.MILLILITRE
                 );
 
-        Quantity weightResult =
-                weight1.add(
-                        weight2,
-                        WeightUnit.KILOGRAM
+        Quantity result =
+                q1.add(
+                        q2,
+                        VolumeUnit.LITRE
                 );
 
-        System.out.println("Weight Result : "
-                + weightResult);
+        System.out.println("==================================");
+        System.out.println("UC11 - Volume Measurement");
+        System.out.println("==================================");
+
+        System.out.println("First Quantity : " + q1);
+        System.out.println("Second Quantity : " + q2);
+        System.out.println("Result : " + result);
     }
 
     // MAIN METHOD
     public static void main(String[] args) {
 
-        System.out.println("==================================");
-        System.out.println("UC10 - Generic Quantity Class");
-        System.out.println("==================================");
-
-        demonstrateQuantityAddition();
+        demonstrateVolumeAddition();
     }
 }
