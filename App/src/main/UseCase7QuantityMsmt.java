@@ -1,4 +1,4 @@
-class UseCase6QuantityMsmt {
+public class UseCase7QuantityMsmt {
 
     // ENUM FOR UNITS
     enum LengthUnit {
@@ -35,7 +35,7 @@ class UseCase6QuantityMsmt {
             return value * unit.getConversionFactor();
         }
 
-        // Convert to another unit
+        // Convert to target unit
         public Length convertTo(LengthUnit targetUnit) {
 
             double inches = convertToBaseUnit();
@@ -46,17 +46,18 @@ class UseCase6QuantityMsmt {
             return new Length(convertedValue, targetUnit);
         }
 
-        // ADDITION METHOD
-        public Length add(Length other) {
+        // ADDITION WITH TARGET UNIT
+        public Length add(Length other,
+                          LengthUnit targetUnit) {
 
             double totalInches =
                     this.convertToBaseUnit()
                             + other.convertToBaseUnit();
 
             double result =
-                    totalInches / this.unit.getConversionFactor();
+                    totalInches / targetUnit.getConversionFactor();
 
-            return new Length(result, this.unit);
+            return new Length(result, targetUnit);
         }
 
         @Override
@@ -82,25 +83,30 @@ class UseCase6QuantityMsmt {
         }
     }
 
-    // DEMO METHOD
+    // DEMONSTRATION METHOD
     public static void demonstrateAddition(
             double value1,
             LengthUnit unit1,
             double value2,
-            LengthUnit unit2) {
+            LengthUnit unit2,
+            LengthUnit targetUnit) {
 
-        Length length1 = new Length(value1, unit1);
+        Length length1 =
+                new Length(value1, unit1);
 
-        Length length2 = new Length(value2, unit2);
+        Length length2 =
+                new Length(value2, unit2);
 
-        Length result = length1.add(length2);
+        Length result =
+                length1.add(length2, targetUnit);
 
-        System.out.println("==================================");
-        System.out.println("UC6 - Addition of Length Units");
-        System.out.println("==================================");
+        System.out.println("====================================");
+        System.out.println("UC7 - Addition With Target Unit");
+        System.out.println("====================================");
 
         System.out.println("First Length : " + length1);
         System.out.println("Second Length : " + length2);
+        System.out.println("Target Unit : " + targetUnit);
         System.out.println("Result : " + result);
     }
 
@@ -111,7 +117,9 @@ class UseCase6QuantityMsmt {
                 1.0,
                 LengthUnit.FEET,
                 12.0,
-                LengthUnit.INCHES
+                LengthUnit.INCHES,
+                LengthUnit.FEET
         );
     }
 }
+
